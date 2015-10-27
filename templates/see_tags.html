@@ -1,0 +1,62 @@
+{% extends "pro/base.html" %}
+      <!-- Content Wrapper. Contains page content -->
+{% block content %}
+  {% load staticfiles %}
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-64547096-1', 'auto');
+  ga('send', 'pageview');
+
+  </script>
+  <div class="header" style="height:5%">
+    <a href="{% url 'see_all_photos' %}">
+      <button class="pull-left" style="padding:0px 15px; ">See All Photos</button>
+    </a>
+    <div class="pull-right">
+      <div class="dropdown">
+        <div class="btn-group">
+          <button class="dropdown-toggle" data-toggle="dropdown" style="margin-left:45px; padding: 0px 25px; ">Sort By: <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu">
+            <li><a href="#">New Tags</a></li>
+            <li><a href="#">Total Tags</a></li>
+            <li><a href="#">Created date</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="clear:both">
+  {% if not projects %}
+    <div class="col-md-4">
+      <img src="{% static 'pro/No-record-found.png' %}" class="img-responsive" alt="No Project Found" style="margin:0 auto;width:280px;margin-top:0px;"/>
+    </div><!-- /.col -->
+  {% else %}
+    {% for project in projects %}
+      <div class="col-md-4">
+      <!-- USERS LIST -->
+        <div class="box box-danger">
+          <div class="box-header with-border">
+            <h3 class="box-title" style="margin-right:40px;">{{project.title}} </h3>
+          </div><!-- /.box-header -->
+          <div class="box-body" style="height:200px;overflow:hidden;"> 
+            <div class="center-block">
+              <a href = "view_project/{{ project.id }}" >
+                <img src="{{ project.featured_photo_url }}" class="img-responsive" alt="User Image" style="margin:0 auto;width:280px;"/>
+              </a>
+            </div>
+          </div><!-- /.box-body -->
+          <div class="box-footer text-center">
+          </div><!-- /.box-footer -->
+        </div><!--/.box -->
+      </div><!-- /.col -->
+    {% endfor %}
+  {% endif %}
+  </div><!-- /.row -->
+<!-- Main content -->
+<!-- /.content -->
+{% endblock %}

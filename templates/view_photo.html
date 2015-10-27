@@ -1,0 +1,84 @@
+{% extends "pro/base.html" %}
+      <!-- Content Wrapper. Contains page content -->
+{% block content %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+{% block title %}<title>Zimply | Tags </title>{% endblock %}
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-64547096-1', 'auto');
+	ga('send', 'pageview');
+</script>
+<link rel="stylesheet" type="text/css" href="{% static 'pro/kauts/css/text_popup.css' %}">
+<script src="{% static 'pro/kauts/js/text_popup.js' %}"></script>
+<script src="{% static 'pro/kauts/js/mouse_pos.js' %}"></script>
+<script src="{% static 'pro/kauts/js/show_tags.js' %}"></script>
+<script src="{% static 'pro/kauts/js/show_comments.js' %}"></script>
+	<div class="row">
+	    <div class="col-md-6 col-md-offset-1">
+			<div class="box box-danger" id="box">
+				<!-- placing image -->
+				<div id="On_Image">
+					<img id="myImgId" src="{{ photo.img.url }}" alt="Loading..." class="img-responsive">
+					<p>{{message}}</p>
+					<script type="text/javascript">
+						var coords = {{coords|safe}};
+						var myImg = document.getElementById("myImgId");
+						var active = {{active|safe}};
+						var discussions = {{discussions|safe}};
+						showTag(coords, active, discussions);
+						myImg.onmousedown = GetCoordinates;
+					</script>
+				</div>
+				<div id="overlay" class="overlay"></div>
+				<div id="popup" class="popup">
+					<a class="pull-right" id="CloseBtn" style="cursor:pointer; margin-right:6px; margin-top:4px; margin-bottom:2px"> 
+						<i class="fa fa-close"> </i>
+					</a>
+					<form method="POST" enctype="multipart/form-data">
+						{% csrf_token %}
+						<textarea id="add_tag" rows="10" cols="30" name="add_tag" style="width:290px; height:105px; resize:None; margin-left:5px; margin-right:5px"></textarea>
+						<input id="tag" name="comment" value="" style="display:None">
+						<input id="x_co" 	name="x_co" value=0 style="display:None">
+						<input id="y_co" 	name="y_co" value=0 style="display:None">
+						<div class="pull-right" style="margin-top:4px; margin-right:7px">
+							<button type="submit" class="btn btn-primary" style="padding:0; padding-left:40px; padding-right:40px;" onclick= "set_data('0')" >Post</button> 
+						</div>
+					</form>
+				</div>
+			</div>
+	    </div><!-- /.col -->
+	    <div class="col-md-4 col-md-offset-1">
+	    <!-- USERS LIST -->
+	      	<div class="box box-danger" style="height:85%; width:100%;">
+		        <div class="box-header with-border" style="height: 7%;">
+		          	<h3 class="box-title" style="margin-right:40px; height: 5%;">Comments</h3>
+		        </div>
+	        	<div style="overflow-y: auto; height: 75%; margin-bottom: 5px;" id = "comment_box">
+		        </div><!-- /.box-header -->
+		        <div class="footer" style="height: 20%; width: 100%; position: absolute; bottom:1%">
+		        	<form method="POST" enctype="multipart/form-data">
+						{% csrf_token %}
+						<textarea id="add_comment" placeholder="Add Comment" rows="10" cols="30" name="add_comment" style="width:98%; height:75%; resize:None; margin-left:1%; margin-right:1%"></textarea>
+						<input id="comment" name="comment" value="" style="display:None">
+						<input id="tag_x" 	name="x_co" value=-1 style="display:None">
+						<input id="tag_y" 	name="y_co" value=-1 style="display:None">
+						<button type="submit" class="btn btn-primary" style="position:absolute; bottom:0%; right:1%; padding-left:35px; padding-right:35px; padding-top:0; padding-bottom:0" onclick="set_data('1')">Reply</button>
+					</form>
+					<script type="text/javascript">
+		        		var discussions = {{discussions|safe}};
+		        		var coords = {{coords|safe}};
+		        		if(discussions.length != 0){
+			        		var comments = discussions[0];
+			        		showComments(comments, coords[0][0], coords[0][1]);
+						}
+		        	</script>
+	     		</div>
+	      	</div><!-- / .box -->
+	    </div>
+  	</div><!-- /.row -->
+{% endblock %}
