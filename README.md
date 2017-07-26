@@ -1,6 +1,6 @@
 # Introduction
 
-This repo contains templates for adding multiple tags in Images and associate chat with each tag separately. You can find related [css](static/kauts/css) and corresponding [js](static/kauts/js) files in [static](static) folder. Required [png files](static/kauts) is also there in [static](static) folder.
+This repo contains [templates](templates) for adding multiple tags in Images and associate chat with each tag separately. You can find related [css](static/kauts/css) and corresponding [js](static/kauts/js) files in [static](static) folder. Required [png files](static/kauts) is also there in [static](static) folder.
 
 # Working Flow
 
@@ -24,7 +24,7 @@ You can also select a tag and add a comment from right side. Other than that new
 
 # Motivation
 
-
+This additional feature was required to increase interaction between vendors/professionals and users because in description for images it is not possible to include everything that would satisfy every query for all customers. So this additional plug-in was required where a user can ask question on any existing tag or may create new tag and ask questions through app then professionals need to reply their queries from their dashboard and this was main requirement for doing this project.
 
 # Need help/Issues
 
